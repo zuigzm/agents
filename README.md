@@ -34,11 +34,9 @@
 
 AGENTS.md 是默认的权威入口。AGENTS_EN.md 与中文版本保持同一套规则，但不同 Agent 对英文文件名的自动发现约定不同，因此英文版本通常需要显式指定，或复制为目标工具支持的规则文件名。
 
-## 安装方式
+## Agent 安装方式
 
-### 方式一：直接下载到目标项目
-
-在目标项目根目录执行以下命令。
+请在目标项目根目录执行以下命令，将 Agent 规则文件安装到项目中。
 
 macOS、Linux 或 Git Bash：
 
@@ -52,26 +50,10 @@ Windows PowerShell：
 
 安装后，目标项目应包含 AGENTS.md 和 AGENTS_EN.md 两个文件，并且文件位于项目根目录。
 
-### 方式二：克隆后复制
+如果系统没有 curl，也可以使用 wget：
 
-    git clone https://github.com/zuigzm/agents.git
-    cp agents/AGENTS.md /path/to/your-project/AGENTS.md
-    cp agents/AGENTS_EN.md /path/to/your-project/AGENTS_EN.md
-
-Windows PowerShell：
-
-    git clone https://github.com/zuigzm/agents.git
-    Copy-Item agents/AGENTS.md C:/path/to/your-project/AGENTS.md
-    Copy-Item agents/AGENTS_EN.md C:/path/to/your-project/AGENTS_EN.md
-
-### 方式三：作为 Git 子模块
-
-    git submodule add https://github.com/zuigzm/agents.git .agent-rules
-
-多数 Agent 只会自动发现项目根目录或当前目录中的 AGENTS.md，不会自动读取 .agent-rules/AGENTS.md。因此建议将规则文件复制到项目根目录，或者按照目标 Agent 的规则文件约定建立链接。
-
-    cp .agent-rules/AGENTS.md ./AGENTS.md
-    cp .agent-rules/AGENTS_EN.md ./AGENTS_EN.md
+    wget -O AGENTS.md https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS.md
+    wget -O AGENTS_EN.md https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS_EN.md
 
 ## 不同 Agent 的使用方式
 
