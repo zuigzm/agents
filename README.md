@@ -36,18 +36,13 @@ AGENTS.md 是默认的权威入口。AGENTS_EN.md 与中文版本保持同一套
 
 ## Agent 安装方式
 
-当用户要求安装 Agent 或添加 Agent 规则时，请从 https://github.com/zuigzm/agents 获取最新的 AGENTS.md 和 AGENTS_EN.md，检查当前项目根目录是否已有规则文件，确认不会覆盖用户修改后，将它们安装到当前项目根目录并验证安装结果。
+将下面这句话直接复制给目标 AI Agent：
 
-执行时必须遵守以下约束：
+> 请从 https://github.com/zuigzm/agents 获取最新的 AGENTS.md 和 AGENTS_EN.md，检查当前项目根目录是否已有规则文件及未提交修改，确认不会覆盖用户内容后，将规则安装到当前项目根目录，并验证安装结果；除非我明确要求，不要自动提交、推送或修改其他项目文件。
 
-- 目标项目未明确指定时，默认使用当前工作区根目录。
-- 安装前检查现有 AGENTS.md、AGENTS_EN.md、README.md、CONTEXT.md、TASK.md、git status 和 git diff。
-- 已有 AGENTS.md 时不得直接覆盖；先比较并保留项目特有规则，必要时请求用户确认合并方式。
-- 保护用户未提交的修改，不得使用 git reset、git restore、git clean 或其他破坏性操作。
-- 默认安装 AGENTS.md 和 AGENTS_EN.md；用户只要求中文时可以只安装 AGENTS.md。
-- 安装后确认文件位于项目根目录、来源有效、中文和英文规则没有冲突，且没有新增 Secret 或无关修改。
-- 除非用户明确要求，不要自动提交、推送或修改目标项目的其他文件。
-- 如果目标路径不明确、规则合并可能丢失内容，或远程来源无法访问，应暂停并向用户报告，不得声称安装成功。
+如果只需要中文主规则，可使用：
+
+> 请从 https://github.com/zuigzm/agents 获取最新的 AGENTS.md，检查当前项目根目录是否已有规则文件及未提交修改，确认不会覆盖用户内容后，将 AGENTS.md 安装到当前项目根目录并验证安装结果；除非我明确要求，不要自动提交、推送或修改其他项目文件。
 
 ## 不同 Agent 的使用方式
 
