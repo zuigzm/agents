@@ -36,24 +36,61 @@ AGENTS.md 是默认的权威入口。AGENTS_EN.md 与中文版本保持同一套
 
 ## Agent 安装方式
 
-请在目标项目根目录执行以下命令，将 Agent 规则文件安装到项目中。
+本节是供 AI Coding Agent 读取和执行的安装协议，不是要求用户手动复制命令的操作清单。当用户要求“安装 Agent”“添加 Agent 规则”或表达同等意图时，Agent 应按照以下流程执行。
 
-macOS、Linux 或 Git Bash：
+### 安装目标
 
-    curl -fsSL https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS.md -o AGENTS.md
-    curl -fsSL https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS_EN.md -o AGENTS_EN.md
+将本仓库中的规则安装到用户指定的目标项目。若用户未指定目标项目，默认目标是当前工作区根目录。规则文件必须位于目标项目根目录，不能只放在临时目录、子模块目录或 Agent 自己的缓存目录中。
 
-Windows PowerShell：
+默认安装以下文件：
 
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS.md" -OutFile "AGENTS.md"
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS_EN.md" -OutFile "AGENTS_EN.md"
+- AGENTS.md：中文主规则文件，作为默认生效入口；
+- AGENTS_EN.md：英文对应版本，作为英文参考或显式加载的规则文件。
 
-安装后，目标项目应包含 AGENTS.md 和 AGENTS_EN.md 两个文件，并且文件位于项目根目录。
+### Agent 执行流程
 
-如果系统没有 curl，也可以使用 wget：
+1. 确认目标项目路径，并确认目标路径确实是项目根目录。
+2. 检查目标项目现有的 AGENTS.md、AGENTS_EN.md、README.md、CONTEXT.md 和 TASK.md。
+3. 检查 git status 和 git diff，识别用户已有的未提交修改。
+4. 如果目标项目已经存在 AGENTS.md，不得直接覆盖。先比较内容；保留项目特有规则，并在必要时请求用户确认如何合并。
+5. 如果目标项目没有 AGENTS.md，从本仓库的主分支获取最新 AGENTS.md，并写入目标项目根目录。
+6. 同步获取 AGENTS_EN.md，并写入目标项目根目录；如果用户只要求中文规则，可以只安装 AGENTS.md。
+7. 检查两个文件的章节、核心安全规则和规则优先级，确认中文和英文版本没有冲突。
+8. 检查目标项目的 .gitignore，确保规则文件不会被忽略。
+9. 向用户报告安装结果。除非用户明确要求，不要自动提交、推送或修改目标项目的其他文件。
 
-    wget -O AGENTS.md https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS.md
-    wget -O AGENTS_EN.md https://raw.githubusercontent.com/zuigzm/agents/main/AGENTS_EN.md
+### 来源
+
+默认规则来源是本仓库的 main 分支：
+
+    https://github.com/zuigzm/agents
+
+Agent 可以使用当前已检出的本仓库文件，也可以从远程仓库获取最新版本。使用远程版本前，应确认网络访问成功；访问失败时不得声称安装成功。
+
+### 冲突与安全处理
+
+- 已有 AGENTS.md 时，先读取和比较，不得无确认覆盖用户规则。
+- 发现目标项目有未提交修改时，保护这些修改，不得使用 git reset、git restore、git clean 或其他破坏性操作。
+- 目标项目的项目特有规则优先保留；通用规则应通过人工合并进入主文件。
+- 不得把 Secret、Token、密码、Cookie 或其他凭据写入规则文件。
+- 不得因为安装规则而删除、重置或迁移数据库，也不得修改部署或认证配置。
+- 如果安装目标不明确，或合并操作可能造成规则丢失，应暂停并请求用户确认。
+
+### 安装完成标准
+
+只有同时满足以下条件，Agent 才能报告安装完成：
+
+- AGENTS.md 已位于目标项目根目录；
+- AGENTS_EN.md 已安装，或用户明确选择只安装中文版本；
+- 文件内容来自本仓库的有效版本；
+- 中文和英文规则没有明显冲突；
+- 原有项目规则和用户未提交修改未被覆盖；
+- 没有新增 Secret 或无关修改；
+- Agent 已说明实际修改的文件和验证结果。
+
+### 推荐完成报告
+
+安装完成后，Agent 应报告：目标项目路径、安装的文件、规则来源、是否保留或合并了原有规则、执行过的验证、未执行的操作，以及用户接下来是否需要提交这些文件。
 
 ## 不同 Agent 的使用方式
 
